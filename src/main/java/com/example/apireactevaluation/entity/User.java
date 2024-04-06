@@ -26,6 +26,8 @@ public class User {
     @OneToMany
     @JsonIgnore
     private List<Book> books;
+    @JsonIgnore
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserLibrary userLibrary;
 

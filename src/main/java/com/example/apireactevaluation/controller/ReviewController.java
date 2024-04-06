@@ -30,28 +30,24 @@ public class ReviewController {
         return new ResponseEntity<>(newReview, HttpStatus.CREATED);
     }
 
-    // Endpoint pour récupérer les critiques d'un livre par son ID
     @GetMapping("/book/{bookId}")
     public ResponseEntity<List<Review>> getReviewsByBookId(@PathVariable("bookId") Long bookId) {
         List<Review> reviews = reviewService.getReviewsByBookId(bookId);
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
 
-    // Endpoint pour récupérer les critiques d'un utilisateur par son ID
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Review>> getReviewsByUserId(@PathVariable("userId") Long userId) {
         List<Review> reviews = reviewService.getReviewsByUserId(userId);
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
 
-    // Endpoint pour supprimer une critique par son ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReviewById(@PathVariable("id") Long id) {
         reviewService.deleteReviewById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    // Endpoint pour ajouter une critique à un livre
     @PostMapping("/add-review/{userId}/{bookId}")
     public ResponseEntity<Review> addReview(@PathVariable("userId") Long userId, @PathVariable("bookId") Long bookId, @RequestParam String comment, @RequestParam int rating) {
         Review review = reviewService.addReview(userId, bookId, comment, rating);
